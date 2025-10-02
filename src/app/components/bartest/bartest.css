@@ -1,0 +1,12 @@
+nav ul
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    color: beige;
+
+}
+nav li{
+    color: aqua;
+}
