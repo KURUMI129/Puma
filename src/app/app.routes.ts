@@ -7,7 +7,7 @@ import { Bartest } from './components/bartest/bartest';
 import { NgModule } from '@angular/core';
 export const routes: Routes = [
     { path: '',
-        redirectTo:'home',
+        redirectTo:'login',
         pathMatch: 'full'
     },
     {
