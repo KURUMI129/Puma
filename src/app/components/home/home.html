@@ -34,39 +34,56 @@
     </div>
         <title>Listado de productos</title>
  </div> -->
- <div *ngIf="isAdmin" class="container mt-5">
-    <div class="card shadow-sm rounded-4 border-0">
-        <div class="card-header bg-dark text-white text-center rounded-top-4 py-3">
-            <h5 class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
-        </div>
-        <div class="card-body p-4">
-            <form action="">
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Imagen del artículo</label>
-                    <input class="form-control bg-light border-0" type="file" id="formFile" name="photo" accept="image/*" [(ngModel)]="productObj.photo">
-                </div>
-                <div class="mb-3">
-                    <label for="articleName" class="form-label">Nombre</label>
-                    <input type="text" class="form-control bg-light border-0" id="articleName" name="name" placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.name">
-                </div>
-                <div class="mb-3">
-                    <label for="articleDescription" class="form-label">Descripción</label>
-                    <textarea class="form-control bg-light border-0" id="articleDescription" rows="3" name="description" placeholder="Describe las características principales del artículo" [(ngModel)]="productObj.description"></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="articlePrice" class="form-label">Precio</label>
-                    <div class="input-group">
-                        <span class="input-group-text bg-light border-0">$</span>
-                        <input type="number" id="articlePrice" class="form-control bg-light border-0" name="price" placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.price">
+ <main>
+    <div *ngIf="isAdmin" class="container mt-5">
+        <div class="card shadow-sm rounded-4 border-0">
+            <div class="card-header bg-dark text-white text-center rounded-top-4 py-3">
+                <h5 class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
+            </div>
+            <div class="card-body p-4">
+                <form action="">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Imagen del artículo</label>
+                        <input class="form-control bg-light border-0" type="file" id="formFile" name="photo" accept="image/*" [(ngModel)]="productObj.photo">
                     </div>
-                </div>
-                <div class="d-grid gap-2 mt-4">
-                    <button type="button" class="btn btn-dark btn-lg" (click)="onsaveRecord()">
-                        Guardar artículo
-                    </button>
-                </div>
-            </form>
+                    <div class="mb-3">
+                        <label for="articleName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control bg-light border-0" id="articleName" name="name" placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="articleDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control bg-light border-0" id="articleDescription" rows="3" name="description" placeholder="Describe las características principales del artículo" [(ngModel)]="productObj.description"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="articlePrice" class="form-label">Precio</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0">$</span>
+                            <input type="number" id="articlePrice" class="form-control bg-light border-0" name="price" placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.price">
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="button" class="btn btn-dark btn-lg" (click)="onsaveRecord()">
+                            Guardar artículo
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>description</th>
+                        <th>price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of productList">
+                        <td>{{product.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <title>Listado de productos</title>
-</div>
+</main>
