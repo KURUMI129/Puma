@@ -11,7 +11,7 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'home/:userType',
+        path: 'home',
         component: Home
     },
     {

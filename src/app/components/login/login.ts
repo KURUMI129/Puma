@@ -17,6 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
+  // 2. Añade RouterModule a la lista de imports
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
@@ -35,7 +36,6 @@ export class Login {
   setUserType(type: string) {
     this.userType = type;
   }
-
 
   onLogin(){
     if(this.loginObj.adminId == '01' && this.loginObj.password == '123'){
