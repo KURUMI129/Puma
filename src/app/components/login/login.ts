@@ -17,7 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule, Router, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -44,6 +44,5 @@ export class Login {
     else{
       alert("Wrong credentials");
     }
-
   }
 }
