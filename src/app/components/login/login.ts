@@ -17,7 +17,6 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  // 2. Añade RouterModule a la lista de imports
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
@@ -28,21 +27,29 @@ export class Login {
     email: '',
     password: '',
     adminId: ''
-  }
+  };
 
   router = inject(Router);
   
-
   setUserType(type: string) {
     this.userType = type;
   }
 
-  onLogin(){
-    if(this.loginObj.adminId == '01' && this.loginObj.password == '123'){
-      this.router.navigateByUrl("home");
-    }
-    else{
-      alert("Wrong credentials");
+  onLogin() {
+    if (this.userType == 'admin') {
+      // Lógica para el administrador
+      if (this.loginObj.adminId == '01' && this.loginObj.password == '123') {
+        this.router.navigate(['/home', 'admin']);
+      } else {
+        alert("Credenciales de administrador incorrectas");
+      }
+    } else {
+      // Lógica para el usuario normal con datos de prueba
+      if (this.loginObj.email == 'Cadenaj285@gmail.com' && this.loginObj.password == '123') {
+        this.router.navigate(['/home', 'user']);
+      } else {
+        alert("Credenciales de usuario incorrectas");
+      }
     }
   }
 }

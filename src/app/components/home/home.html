@@ -1,14 +1,14 @@
 <main>
     <div *ngIf="isAdmin" class="container mt-5">
-        <div class="card shadow-sm rounded-4 border-0">
+        <div class="card shadow-sm rounded-4 border-0 mb-5">
             <div class="card-header bg-dark text-white text-center rounded-top-4 py-3">
                 <h5 class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
             </div>
             <div class="card-body p-4">
-                <form action="">
+                <form>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagen del artículo</label>
-                        <input class="form-control bg-light border-0" type="file" id="formFile" name="photo" accept="image/*" [(ngModel)]="productObj.photo">
+                        <input class="form-control bg-light border-0" type="file" id="formFile" accept="image/*" (change)="onFileSelected($event)">
                     </div>
                     <div class="mb-3">
                         <label for="articleName" class="form-label">Nombre</label>
@@ -33,21 +33,44 @@
                 </form>
             </div>
         </div>
-    <div>
-            <table>
+        <div class="mt-4">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>name</th>
-                        <th>description</th>
-                        <th>price</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Acciones</th> 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of productList">
-                        <td>{{product.name}}</td>
+                    <tr *ngFor="let product of productList; let i = index">
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price | currency }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="onDeleteRecord(i)">
+                                Eliminar
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div *ngIf="!isAdmin" class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4" *ngFor="let product of productList">
+                <div class="card product-card h-100">
+                    <img [src]="product.photo" class="card-img-top product-image" alt="{{product.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text fw-bold">{{ product.price | currency }}</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </main>

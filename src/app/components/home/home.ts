@@ -1,38 +1,96 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router'; // 3. Importa ActivatedRoute
-import { CommonModule } from '@angular/common';   // 4. Importa CommonModule para usar *ngIf
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule], // 5. Añádelo a los imports
+  imports: [FormsModule, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
-  // Variable para saber si el usuario es admin
+export class Home implements OnInit {
   isAdmin = false;
   
-  productObj = {
-    photo:'',
-    name:'',
-    description:'',
-    price:''
-  }
+  productObj: any = {
+    photo: null, // Ahora guardaremos el archivo temporalmente aquí
+    name: '',
+    description: '',
+    price: ''
+  };
   productList: any = [];
 
   constructor(private route: ActivatedRoute) {
-    // Leemos el parámetro 'userType' de la URL
     const userType = this.route.snapshot.paramMap.get('userType');
-    // Si el parámetro es 'admin', ponemos isAdmin en true
     if (userType === 'admin') {
       this.isAdmin = true;
     }
   }
 
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    const savedProducts = localStorage.getItem('product');
+    if (savedProducts) {
+      this.productList = JSON.parse(savedProducts);
+    }
+  }
+
+  /**
+   * Esta función ahora solo guarda el archivo seleccionado en el objeto temporal.
+   * Ya no procesa la imagen.
+   */
+  onFileSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.productObj.photo = event.target.files[0];
+    }
+  }
+
+  /**
+   * Esta función ahora se encarga de leer el archivo, convertirlo y LUEGO guardar todo.
+   */
   onsaveRecord() {
-    this.productList.push(this.productObj);
-    localStorage.setItem('product',JSON.stringify(this.productList));
-    console.log(this.productList);
+    // Verificamos si se ha seleccionado un archivo.
+    if (!this.productObj.photo) {
+      alert("Por favor, selecciona una imagen para el producto.");
+      return; // Detenemos la función si no hay imagen.
+    }
+
+    const reader = new FileReader();
+    
+    // Le decimos al lector qué hacer cuando termine de leer el archivo.
+    reader.onload = () => {
+      // 1. Creamos un nuevo objeto para el producto.
+      const newProduct = {
+        name: this.productObj.name,
+        description: this.productObj.description,
+        price: this.productObj.price,
+        // 2. Asignamos la imagen ya convertida en Base64.
+        photo: reader.result as string
+      };
+
+      // 3. Añadimos el nuevo producto a nuestra lista.
+      this.productList.push(newProduct);
+
+      // 4. Guardamos la lista actualizada en localStorage.
+      localStorage.setItem('product', JSON.stringify(this.productList));
+      
+      // 5. Limpiamos el formulario para el siguiente producto.
+      this.productObj = { photo: null, name: '', description: '', price: '' };
+      // También necesitamos limpiar el valor del input de archivo en el HTML
+      // (aunque esto es más complejo, este reseteo es suficiente para la lógica).
+    };
+
+    // Iniciamos la lectura del archivo que guardamos temporalmente.
+    reader.readAsDataURL(this.productObj.photo);
   } 
+
+  onDeleteRecord(index: number) {
+    if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
+      this.productList.splice(index, 1);
+      localStorage.setItem('product', JSON.stringify(this.productList));
+    }
+  }
 }

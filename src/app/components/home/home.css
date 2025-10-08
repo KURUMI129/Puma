@@ -1,0 +1,17 @@
+/* Estilo general para cada tarjeta de producto */
+.product-card {
+  border: 1px solid #eee; /* Borde sutil */
+  transition: box-shadow 0.3s ease-in-out; /* Animación suave para la sombra */
+}
+
+/* Efecto de sombra al pasar el mouse sobre la tarjeta */
+.product-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la imagen del producto dentro de la tarjeta */
+.product-image {
+  width: 100%; /* La imagen ocupa todo el ancho de la tarjeta */
+  height: 250px; /* Altura fija para todas las imágenes */
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+}
