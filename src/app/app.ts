@@ -17,11 +17,13 @@ export class App {
   
   showHeader = true;
 
-  /**
-   * Esta función es llamada por el evento (activate) del <router-outlet>.
-   * Revisa si el componente que se cargó es el de Login para decidir si oculta el header.
+/**
+   * Esta es una "función" o "método".
+   * Se activa cuando una nueva página se carga en el <router-outlet>.
    */
   onComponentLoad(component: any) {
+    // Revisa si el componente que se cargó es la página de Login.
+    // Si es el Login, pone 'showHeader' en 'false' para ocultar el header.
     this.showHeader = !(component instanceof Login);
   }
 }

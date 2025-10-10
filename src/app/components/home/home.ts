@@ -9,7 +9,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
+// 'implements OnInit' es como firmar un contrato. Le dice a Angular:
+// "Prometo que esta clase tendrá una función especial llamada ngOnInit".
 export class Home implements OnInit {
+   // Propiedades de la clase Home.
   isAdmin = false;
   
   productObj: any = {
@@ -20,13 +23,25 @@ export class Home implements OnInit {
   };
   productList: any = [];
 
+  // === ¿QUÉ ES EL CONSTRUCTOR? ===
+  // El constructor es una función especial que se ejecuta AUTOMÁTICAMENTE
+  // en el preciso instante en que el componente es CREADO (antes de que se vea en pantalla).
+  // Es el lugar perfecto para preparar las herramientas que necesitaremos.
   constructor(private route: ActivatedRoute) {
+    // Aquí estamos pidiendo una herramienta llamada 'ActivatedRoute'.
+    // Angular la "inyecta" (nos la da) para que podamos usarla.
+    // La usamos para leer la URL y ver si el usuario es 'admin'.
     const userType = this.route.snapshot.paramMap.get('userType');
     if (userType === 'admin') {
       this.isAdmin = true;
     }
   }
 
+  // === ¿QUÉ ES ngOnInit? ===
+  // Esta es otra función especial (un "ciclo de vida").
+  // Se ejecuta AUTOMÁTICAMENTE después del constructor, una vez que
+  // el componente ya está listo para mostrarse.
+  // Es el lugar ideal para cargar datos iniciales, como llamar a una API o, en nuestro caso, leer el localStorage.
   ngOnInit(): void {
     this.loadProducts();
   }
