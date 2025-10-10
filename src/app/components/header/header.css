@@ -1,3 +1,10 @@
+/* Mantiene el menú desplegable visible al pasar el mouse */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+}
+
+/* Estilo para el logo en el header */
+.header-logo {
+  height: 40px;  /* Altura fija para el logo */
+  width: auto;   /* El ancho se ajustará automáticamente */
 }

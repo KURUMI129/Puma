@@ -44,7 +44,7 @@ export class Login {
         alert("Credenciales de administrador incorrectas");
       }
     } else {
-      // Lógica para el usuario normal con datos de prueba
+      // Lógica para el usuario normal con datos de pruebapanel
       if (this.loginObj.email == 'Cadenaj285@gmail.com' && this.loginObj.password == '123') {
         this.router.navigate(['/home', 'user']);
       } else {

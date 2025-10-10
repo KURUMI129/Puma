@@ -14,7 +14,7 @@
         </form>
     </div>
 </section> -->
-<section>  
+<section>
     <div>
         <h2>Bienvenido</h2>
         <p>Selecciona tu perfil para iniciar sesión.</p>
@@ -36,7 +36,17 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" [(ngModel)]="loginObj.password" required>
             </div>
-            <button type="button" (click)="onLogin()">Iniciar Sesión</button>
+            <div class="password-help-links">
+                <a routerLink="/forgot-password" class="forgot-password-link">¿Olvidaste la contraseña?</a>
+                <a routerLink="#" class="help-link">
+                    <i class="bi bi-question-circle me-1"></i> Ayuda
+                </a>
+            </div>
+            <button type="button" class="login-button" (click)="onLogin()">Iniciar Sesión</button>
         </form>
+        <div class="additional-links registration-link">
+            <span>¿No tienes una cuenta? </span>
+            <a routerLink="/sing-in">Regístrate aquí</a>
+        </div>
     </div>
 </section>
