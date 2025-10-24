@@ -60,16 +60,18 @@
     </div>
     <div *ngIf="!isAdmin" class="container mt-4">
         <div class="row">
-            <div class="col-md-4 mb-4" *ngFor="let product of productList">
+            <div class="col-md-4 mb-4" *ngFor="let producto of productos">
                 <div class="card product-card h-100">
-                    <img [src]="product.photo" class="card-img-top product-image" alt="{{product.name}}">
+                    <img [src]="producto.photo">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
-                        <p class="card-text fw-bold">{{ product.price | currency }}</p>
+                        <h5 class="card-title">{{ producto.name }}</h5>
+                        <p class="card-text">{{ producto.description }}</p>
+                        <p class="card-text fw-bold">{{ producto.price | currency }}</p>
                     </div>
                 </div>
-
+                <!-- <div *ngFor="let producto of productos">
+                    <h1>{{producto.name}}</h1>
+                </div> -->
             </div>
         </div>
     </div>
