@@ -8,21 +8,26 @@
                 <form>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagen del artículo</label>
-                        <input class="form-control bg-light border-0" type="file" id="formFile" accept="image/*" (change)="onFileSelected($event)">
+                        <input class="form-control bg-light border-0" type="file" id="formFile" accept="image/*"
+                            (change)="onFileSelected($event)">
                     </div>
                     <div class="mb-3">
                         <label for="articleName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control bg-light border-0" id="articleName" name="name" placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.name">
+                        <input type="text" class="form-control bg-light border-0" id="articleName" name="name"
+                            placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.name">
                     </div>
                     <div class="mb-3">
                         <label for="articleDescription" class="form-label">Descripción</label>
-                        <textarea class="form-control bg-light border-0" id="articleDescription" rows="3" name="description" placeholder="Describe las características principales del artículo" [(ngModel)]="productObj.description"></textarea>
+                        <textarea class="form-control bg-light border-0" id="articleDescription" rows="3"
+                            name="description" placeholder="Describe las características principales del artículo"
+                            [(ngModel)]="productObj.description"></textarea>
                     </div>
                     <div class="mb-4">
                         <label for="articlePrice" class="form-label">Precio</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-0">$</span>
-                            <input type="number" id="articlePrice" class="form-control bg-light border-0" name="price" placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.price">
+                            <input type="number" id="articlePrice" class="form-control bg-light border-0" name="price"
+                                placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.price">
                         </div>
                     </div>
                     <div class="d-grid gap-2 mt-4">
@@ -40,14 +45,14 @@
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
-                        <th>Acciones</th> 
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let product of productList; let i = index">
                         <td>{{ product.name }}</td>
                         <td>{{ product.description }}</td>
-                        <td>{{ product.price | currency }}</td>
+                        <td [textContent]="product.price | currency"></td>
                         <td>
                             <button class="btn btn-danger btn-sm" (click)="onDeleteRecord(i)">
                                 Eliminar
@@ -62,16 +67,13 @@
         <div class="row">
             <div class="col-md-4 mb-4" *ngFor="let producto of productos">
                 <div class="card product-card h-100">
-                    <img [src]="producto.photo">
+                    <img [src]="producto.photo" class="product-image card-img-top" alt="{{ producto.name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.name }}</h5>
                         <p class="card-text">{{ producto.description }}</p>
-                        <p class="card-text fw-bold">{{ producto.price | currency }}</p>
+                        <p class="card-text fw-bold" [textContent]="producto.price | currency"></p>
                     </div>
                 </div>
-                <!-- <div *ngFor="let producto of productos">
-                    <h1>{{producto.name}}</h1>
-                </div> -->
             </div>
         </div>
     </div>
