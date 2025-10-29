@@ -1,5 +1,5 @@
 export interface Iisproductos {
-    photo: string; 
+    photo: string;
     name: string;
     description: string;
     price: number;

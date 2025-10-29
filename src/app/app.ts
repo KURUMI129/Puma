@@ -14,13 +14,13 @@ import { Login } from './components/login/login';
 })
 export class App {
   protected readonly title = signal('Store-Online');
-  
+
   showHeader = true;
 
-/**
-   * Esta es una "función" o "método".
-   * Se activa cuando una nueva página se carga en el <router-outlet>.
-   */
+  /**
+     * Esta es una "función" o "método".
+     * Se activa cuando una nueva página se carga en el <router-outlet>.
+     */
   onComponentLoad(component: any) {
     // Revisa si el componente que se cargó es la página de Login.
     // Si es el Login, pone 'showHeader' en 'false' para ocultar el header.

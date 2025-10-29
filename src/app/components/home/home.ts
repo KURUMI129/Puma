@@ -14,9 +14,9 @@ import { Productos } from '../../services/productos';
 // 'implements OnInit' es como firmar un contrato. Le dice a Angular:
 // "Prometo que esta clase tendrá una función especial llamada ngOnInit".
 export class Home implements OnInit {
-   // Propiedades de la clase Home.
+  // Propiedades de la clase Home.
   isAdmin = false;
-  
+
   productos: Iisproductos[] = [];
 
   productObj: any = {
@@ -67,7 +67,7 @@ export class Home implements OnInit {
     }
 
     const reader = new FileReader();
-    
+
     // Le decimos al lector qué hacer cuando termine de leer el archivo.
     reader.onload = () => {
       // 1. Creamos un nuevo objeto para el producto.
@@ -84,7 +84,7 @@ export class Home implements OnInit {
 
       // 4. Guardamos la lista actualizada en localStorage.
       localStorage.setItem('product', JSON.stringify(this.productList));
-      
+
       // 5. Limpiamos el formulario para el siguiente producto.
       this.productObj = { photo: null, name: '', description: '', price: '' };
       // También necesitamos limpiar el valor del input de archivo en el HTML
@@ -93,7 +93,7 @@ export class Home implements OnInit {
 
     // Iniciamos la lectura del archivo que guardamos temporalmente.
     reader.readAsDataURL(this.productObj.photo);
-  } 
+  }
 
   onDeleteRecord(index: number) {
     if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {

@@ -8,12 +8,12 @@
 <router-outlet /> -->
 <header *ngIf="showHeader">
     <app-header></app-header>
-    
-</header> 
+
+</header>
 
 <main>
     <router-outlet (activate)="onComponentLoad($event)"></router-outlet>
 </main>
 
 <footer *ngIf="showHeader">
-    </footer>
+</footer>
