@@ -1,19 +1,12 @@
-<!-- <header>
-</header> 
-<main>
-</main>
-<footer>
-    <app-header></app-header>
-</footer>
-<router-outlet /> -->
 <header *ngIf="showHeader">
-    <app-header></app-header>
+     <app-header></app-header>
+     
+ </header> 
 
-</header>
+ <main>
+     <router-outlet (activate)="onComponentLoad($event)"></router-outlet>
+ </main>
 
-<main>
-    <router-outlet (activate)="onComponentLoad($event)"></router-outlet>
-</main>
-
-<footer *ngIf="showHeader">
-</footer>
+ <footer *ngIf="showHeader">
+     <app-footer></app-footer>
+ </footer>

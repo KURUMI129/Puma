@@ -1,0 +1,43 @@
+.footer-container {
+   width: 100%;
+ }
+ 
+ /* Estilo para el logo en el footer */
+ .footer-logo {
+   height: 30px;
+   width: auto;
+ }
+ 
+ /* Estilos para los enlaces del footer */
+ .footer-link {
+   color: #adb5bd; /* Un gris claro para los enlaces */
+   text-decoration: none;
+   transition: color 0.3s ease;
+ }
+ 
+ .footer-link:hover,
+ .footer-link:focus {
+   color: #ffffff; /* Blanco al pasar el mouse */
+   text-decoration: underline;
+ }
+ 
+ /* Estilos para los íconos de redes sociales */
+ .social-icons a i {
+   transition: transform 0.3s ease, color 0.3s ease;
+ }
+ 
+ .social-icons a:hover i,
+ .social-icons a:focus i {
+   transform: scale(1.1); /* Efecto de zoom leve */
+   color: #f8f9fa; /* Un blanco más brillante al pasar el mouse */
+ }
+ 
+ /* Quitar estilos de párrafo por defecto para los enlaces */
+ .footer-container p {
+   margin-bottom: 0.75rem;
+ }
+ 
+ /* Barra inferior de copyright */
+ .copyright-bar {
+   background-color: rgba(0, 0, 0, 0.15);
+ }
