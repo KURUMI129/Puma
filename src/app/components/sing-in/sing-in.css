@@ -1,0 +1,185 @@
+section.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Aumentamos el padding para que quepa el formulario largo */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    min-height: 100vh;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+section.form-container>div {
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    /* Un poco más ancho para el formulario */
+}
+
+h2 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    /* Reducimos el margen inferior del título */
+}
+
+form div {
+    margin-bottom: 1rem;
+    text-align: left;
+    box-shadow: none;
+    padding: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-button {
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    border: none;
+    margin-top: 1.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #333;
+}
+
+.additional-links {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.additional-links span {
+    color: #555;
+}
+
+.additional-links a {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.additional-links a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para la fila de Fecha de Nacimiento */
+.form-row {
+    display: flex;
+    gap: 0.75rem;
+    /* Espacio entre los campos DD/MM/AAAA */
+}
+
+.form-col {
+    flex: 1;
+    /* Hace que los 3 campos compartan el espacio */
+}
+
+.label-light {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #777;
+}
+
+/* Estilo para los botones de Sexo */
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+
+.radio-group label {
+    font-weight: normal;
+    margin: 0;
+}
+
+.radio-group input[type="radio"] {
+    width: auto;
+    /* Para que el botón de radio no se estire */
+}
+
+/* Estilo para los checkboxes */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    /* Alinea el check al inicio del texto */
+    gap: 0.5rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    /* Para que el checkbox no se estire */
+    margin-top: 0.25rem;
+}
+
+.checkbox-group label {
+    font-weight: normal;
+    margin: 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+/* Estilo para el nuevo subtítulo */
+.form-subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+    /* Lo dejamos pegado al título */
+}
+
+.password-requirements {
+    display: none;
+    /* Oculto por defecto */
+    background-color: #f8f9fa;
+    /* Un fondo gris claro */
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    /* Espacio entre el input y la caja */
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.password-requirements ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    /* Espacio para las viñetas */
+}
+
+.password-requirements li {
+    margin-bottom: 0.25rem;
+}
+
+/* Cuando el input de contraseña esté :focus (seleccionado), */
+/* muestra el siguiente elemento (+) con la clase .password-requirements */
+input[type="password"]:focus+.password-requirements {
+    display: block;
+}

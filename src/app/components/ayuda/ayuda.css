@@ -1,0 +1,39 @@
+/* Reutilizamos el estilo del contenedor de login pero lo adaptamos */
+.ayuda-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Alineado arriba */
+    min-height: 80vh;
+    /* Menos altura que el login */
+    padding-top: 5rem;
+    /* Espacio superior */
+    padding-bottom: 5rem;
+    text-align: left;
+    background-color: #f4f4f4;
+}
+
+/* El cuadro blanco */
+.ayuda-container>div {
+    padding: 2.5rem;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    /* Más ancho para el texto */
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+}
+
+.faq-item h4 {
+    font-weight: 600;
+    color: #333;
+}
+
+.faq-item p {
+    color: #555;
+    margin-bottom: 0;
+}

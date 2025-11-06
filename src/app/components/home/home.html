@@ -1,8 +1,11 @@
 <main>
     <div *ngIf="isAdmin" class="container mt-5">
+
         <div class="card shadow-sm rounded-4 border-0 mb-5">
             <div class="card-header bg-dark text-white text-center rounded-top-4 py-3">
-                <h5 class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
+                <h5 *ngIf="editingProductIndex === null" class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
+                <h5 *ngIf="editingProductIndex !== null" class="mb-0 fw-bold">Editando Artículo: {{ productObj.name }}
+                </h5>
             </div>
             <div class="card-body p-4">
                 <form>
@@ -10,6 +13,11 @@
                         <label for="formFile" class="form-label">Imagen del artículo</label>
                         <input class="form-control bg-light border-0" type="file" id="formFile" accept="image/*"
                             (change)="onFileSelected($event)">
+                        <div *ngIf="editingProductIndex !== null && productObj.photo" class="mt-2">
+                            <small>Imagen actual:</small>
+                            <img [src]="productObj.photo" alt="Vista previa"
+                                style="width: 100px; height: auto; display: block; border-radius: 4px;">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="articleName" class="form-label">Nombre</label>
@@ -32,13 +40,51 @@
                     </div>
                     <div class="d-grid gap-2 mt-4">
                         <button type="button" class="btn btn-dark btn-lg" (click)="onsaveRecord()">
-                            Guardar artículo
+                            {{ editingProductIndex === null ? 'Guardar artículo' : 'Actualizar artículo' }}
+                        </button>
+                        <button *ngIf="editingProductIndex !== null" type="button"
+                            class="btn btn-outline-secondary btn-sm" (click)="cancelEdit()">
+                            Cancelar Edición
                         </button>
                     </div>
                 </form>
             </div>
         </div>
+
+        <div class="mt-4">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of productos; let i = index">
+                        <td>
+                            <img [src]="product.photo" alt="{{ product.name }}"
+                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td [textContent]="product.price | currency"></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm me-2" (click)="onEdit(i)">
+                                <i class="bi bi-pencil-fill"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm" (click)="onDeleteRecord(i)">
+                                <i class="bi bi-trash-fill"></i> Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <div *ngIf="!isAdmin" class="container mt-4">
         <div class="row">
             <div class="col-md-4 mb-4" *ngFor="let producto of productos">

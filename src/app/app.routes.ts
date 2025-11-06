@@ -6,6 +6,7 @@ import { Footer } from './components/footer/footer';
 import { Bartest } from './components/bartest/bartest';
 import { ForgotPassword } from './components/forgot-password/forgot-password';
 import { SingIn } from './components/sing-in/sing-in';
+import { Ayuda } from './components/ayuda/ayuda';
 
 export const routes: Routes = [
     {
@@ -41,5 +42,9 @@ export const routes: Routes = [
     {
         path: 'sing-in',
         component: SingIn
+    },
+    {
+        path: 'ayuda',
+        component: Ayuda
     }
 ];

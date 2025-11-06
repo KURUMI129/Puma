@@ -1,0 +1,11 @@
+/* Hacemos que app-root (el componente anfitrión) sea un contenedor flex */
+ :host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la pantalla */
+ }
+ 
+ /* Hacemos que el contenido principal <main> crezca y ocupe el espacio sobrante */
+ main {
+  flex: 1; /* Esta es la magia: empuja el footer hacia abajo */
+ }

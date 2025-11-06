@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Iisproductos } from '../models/is.Model'; // Asegúrate que la ruta al modelo sea correcta
+import { Iisproductos } from '../models/is.Model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Productos {
-  // Lista privada de productos predefinidos
+
   private productos: Iisproductos[] = [
     {
       photo: '/Recursos/Articulos/descarga.jpeg',
@@ -27,38 +27,30 @@ export class Productos {
       description: 'Tenis casuales completamente negros.',
       price: 125,
       sport: ['Casual', 'Urbano']
-    },
-    {
-      photo: '/Recursos/Articulos/teni.5.jfif.jpg',
-      name: 'Puma CA Pro Rojos',
-      description: 'Tenis casuales blancos con detalles rojos.',
-      price: 115,
-      sport: ['Casual', 'Urbano']
-    },
-    {
-      photo: '/Recursos/Articulos/5c9f3448-d2e0-4786-b609-6ae571fba52b.jpeg',
-      name: 'Nike Dunk Low Retro',
-      description: 'Tenis Nike Dunk de colores neutros.',
-      price: 150,
-      sport: ['Skate', 'Urbano']
-    },
-    {
-      photo: '/Recursos/Articulos/The original Chuck Taylor All Star—an icon for….jpeg', // Converse
-      name: 'Converse Chuck Taylor',
-      description: 'Clásicos Converse All Star negros.',
-      price: 90,
-      sport: ['Casual', 'Skate', 'Baloncesto']
-    },
-    {
-      photo: '/Recursos/Articulos/teniD.webp',
-      name: 'Puma Running Lite',
-      description: 'Tenis Puma para correr, color gris claro.',
-      price: 130,
-      sport: ['Running']
     }
   ];
 
   obtenerProductos(): Iisproductos[] {
     return this.productos;
+  }
+
+  agregarProducto(producto: Iisproductos) {
+    this.productos.push(producto);
+    console.log('Productos en memoria:', this.productos);
+  }
+
+  eliminarProducto(index: number) {
+    if (index > -1 && index < this.productos.length) {
+      this.productos.splice(index, 1);
+    }
+  }
+
+  /**
+   * Actualiza un producto existente en la lista.
+   */
+  actualizarProducto(index: number, productoActualizado: Iisproductos) {
+    if (index > -1 && index < this.productos.length) {
+      this.productos[index] = productoActualizado;
+    } 
   }
 }
