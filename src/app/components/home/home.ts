@@ -14,15 +14,13 @@ import { Productos } from '../../services/productos';
 export class Home implements OnInit {
   
   isAdmin = false;
-  
-  // Esta lista se llenará con los datos de la API (Base de Datos)
   productos: Iisproductos[] = [];
 
   productObj: any = {
-    photo: null, 
-    name: '',
-    description: '',
-    price: ''
+    Foto: null, 
+    Nombre: '',
+    Descripcion: '',
+    Precio: ''
   };
 
   constructor(private route: ActivatedRoute, private Productos: Productos) {
@@ -36,33 +34,28 @@ export class Home implements OnInit {
     this.loadProductsFromApi(); 
   }
 
-   // Carga la lista de productos desde la API del backend.
   loadProductsFromApi(): void {
     this.Productos.obtenerProductos().subscribe(
       (data) => {
-        // Asigna los datos de la API a nuestra variable local
         this.productos = data;
       },
       (error) => {
-        // Manejo de error si el backend no responde
         console.error('Error al cargar productos desde la API', error);
       }
     );
   }
 
-   // Esta función guarda el archivo seleccionado en el objeto temporal.
-   // Se mantiene para que el formulario no falle.
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      this.productObj.photo = event.target.files[0];
+      this.productObj.Foto = event.target.files[0];
     }
   }
 
-  // Por el momento esta funcion no tiene nada de utilidad solo esta para que no de problemas el formulario
   onsaveRecord() {
     console.log('Botón "Guardar" presionado. Lógica de API pendiente.');
     alert('El formulario de admin está deshabilitado temporalmente.');
-    // Opcional: Limpiamos el formulario después de "enviarlo"
-    this.productObj = { photo: null, name: '', description: '', price: '' };
+
+    this.productObj = { Foto: null, Nombre: '', Descripcion: '', Precio: '' };
   }
+  
 }

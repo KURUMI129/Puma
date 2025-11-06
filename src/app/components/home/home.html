@@ -1,11 +1,8 @@
 <main>
     <div *ngIf="isAdmin" class="container mt-5">
-
         <div class="card shadow-sm rounded-4 border-0 mb-5">
             <div class="card-header bg-dark text-white text-center rounded-top-4 py-3">
-                <h5 *ngIf="editingProductIndex === null" class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
-                <h5 *ngIf="editingProductIndex !== null" class="mb-0 fw-bold">Editando Artículo: {{ productObj.name }}
-                </h5>
+                <h5 class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
             </div>
             <div class="card-body p-4">
                 <form>
@@ -13,87 +10,45 @@
                         <label for="formFile" class="form-label">Imagen del artículo</label>
                         <input class="form-control bg-light border-0" type="file" id="formFile" accept="image/*"
                             (change)="onFileSelected($event)">
-                        <div *ngIf="editingProductIndex !== null && productObj.photo" class="mt-2">
-                            <small>Imagen actual:</small>
-                            <img [src]="productObj.photo" alt="Vista previa"
-                                style="width: 100px; height: auto; display: block; border-radius: 4px;">
-                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="articleName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control bg-light border-0" id="articleName" name="name"
-                            placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.name">
+                        <label for="articleNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control bg-light border-0" id="articleNombre" name="Nombre"
+                            placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.Nombre">
                     </div>
                     <div class="mb-3">
-                        <label for="articleDescription" class="form-label">Descripción</label>
-                        <textarea class="form-control bg-light border-0" id="articleDescription" rows="3"
-                            name="description" placeholder="Describe las características principales del artículo"
-                            [(ngModel)]="productObj.description"></textarea>
+                        <label for="articleDescripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control bg-light border-0" id="articleDescripcion" rows="3"
+                            name="Descripcion" placeholder="Describe las características principales del artículo"
+                            [(ngModel)]="productObj.Descripcion"></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="articlePrice" class="form-label">Precio</label>
+                        <label for="articlePrecio" class="form-label">Precio</label>
                         <div class="input-group">
                             <span class="input-group-text bg-light border-0">$</span>
-                            <input type="number" id="articlePrice" class="form-control bg-light border-0" name="price"
-                                placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.price">
+                            <input type="number" id="articlePrecio" class="form-control bg-light border-0" name="Precio"
+                                placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.Precio">
                         </div>
                     </div>
                     <div class="d-grid gap-2 mt-4">
                         <button type="button" class="btn btn-dark btn-lg" (click)="onsaveRecord()">
-                            {{ editingProductIndex === null ? 'Guardar artículo' : 'Actualizar artículo' }}
-                        </button>
-                        <button *ngIf="editingProductIndex !== null" type="button"
-                            class="btn btn-outline-secondary btn-sm" (click)="cancelEdit()">
-                            Cancelar Edición
+                            Guardar artículo
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-
-        <div class="mt-4">
-            <table class="table table-striped align-middle">
-                <thead>
-                    <tr>
-                        <th style="width: 100px;">Imagen</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let product of productos; let i = index">
-                        <td>
-                            <img [src]="product.photo" alt="{{ product.name }}"
-                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                        </td>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.description }}</td>
-                        <td [textContent]="product.price | currency"></td>
-                        <td>
-                            <button class="btn btn-primary btn-sm me-2" (click)="onEdit(i)">
-                                <i class="bi bi-pencil-fill"></i> Editar
-                            </button>
-                            <button class="btn btn-danger btn-sm" (click)="onDeleteRecord(i)">
-                                <i class="bi bi-trash-fill"></i> Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-
+    
     <div *ngIf="!isAdmin" class="container mt-4">
         <div class="row">
             <div class="col-md-4 mb-4" *ngFor="let producto of productos">
                 <div class="card product-card h-100">
-                    <img [src]="producto.photo" class="product-image card-img-top" alt="{{ producto.name }}">
+                    <img [src]="producto.Foto" class="product-image card-img-top" alt="{{ producto.Nombre }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ producto.name }}</h5>
-                        <p class="card-text">{{ producto.description }}</p>
-                        <p class="card-text fw-bold" [textContent]="producto.price | currency"></p>
+                        <h5 class="card-title">{{ producto.Nombre }}</h5>
+                        <p class="card-text">{{ producto.Descripcion }}</p>
+                        <p class="card-text fw-bold" [textContent]="producto.Precio | currency"></p>
                     </div>
                 </div>
             </div>

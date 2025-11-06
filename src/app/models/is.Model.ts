@@ -1,7 +1,7 @@
 export interface Iisproductos {
-    photo: string;
-    name: string;
-    description: string;
-    price: number;
-    sport: string[];
+    idArticulo: number;
+    Foto: string;
+    Nombre: string;
+    Descripcion: string; 
+    Precio: number;
 }
