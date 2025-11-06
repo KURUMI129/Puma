@@ -10,7 +10,6 @@ export class Productos {
   
   private http = inject(HttpClient);
   
-  // CAMBIO: Apuntamos al endpoint correcto de tu backend
   private apiUrl = 'http://localhost:3000/OArt'; 
 
   obtenerProductos(): Observable<Iisproductos[]> {
