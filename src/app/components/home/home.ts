@@ -12,12 +12,11 @@ import { Productos } from '../../services/productos';
   styleUrl: './home.css'
 })
 export class Home implements OnInit {
-  
+
   isAdmin = false;
   productos: Iisproductos[] = [];
-
   productObj: any = {
-    Foto: null, 
+    Foto: null,
     Nombre: '',
     Descripcion: '',
     Precio: ''
@@ -31,7 +30,7 @@ export class Home implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadProductsFromApi(); 
+    this.loadProductsFromApi();
   }
 
   loadProductsFromApi(): void {
@@ -54,8 +53,6 @@ export class Home implements OnInit {
   onsaveRecord() {
     console.log('Botón "Guardar" presionado. Lógica de API pendiente.');
     alert('El formulario de admin está deshabilitado temporalmente.');
-
     this.productObj = { Foto: null, Nombre: '', Descripcion: '', Precio: '' };
   }
-  
 }
