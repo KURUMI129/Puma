@@ -11,10 +11,10 @@ import { firstValueFrom } from 'rxjs';
   imports: [CommonModule, HttpClientModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
-  // CORRECCIÓN 2: Proveer 'Productos'
   providers: [Productos]
 })
-export class HomeComponent implements OnInit {
+
+export class Home implements OnInit {
 
   articulos: any[] = [];
 
