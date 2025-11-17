@@ -1,57 +1,67 @@
-<main>
-    <div *ngIf="isAdmin" class="container mt-5">
-        <div class="card shadow-sm rounded-4 border-0 mb-5">
-            <div class="card-header bg-dark text-white text-center rounded-top-4 py-3">
-                <h5 class="mb-0 fw-bold">Crear un Nuevo Artículo</h5>
-            </div>
-            <div class="card-body p-4">
-                <form>
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Imagen del artículo</label>
-                        <input class="form-control bg-light border-0" type="file" id="formFile" accept="image/*"
-                            (change)="onFileSelected($event)">
-                    </div>
-                    <div class="mb-3">
-                        <label for="articleNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control bg-light border-0" id="articleNombre" name="Nombre"
-                            placeholder="Ej: Camiseta de algodón" [(ngModel)]="productObj.Nombre">
-                    </div>
-                    <div class="mb-3">
-                        <label for="articleDescripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control bg-light border-0" id="articleDescripcion" rows="3"
-                            name="Descripcion" placeholder="Describe las características principales del artículo"
-                            [(ngModel)]="productObj.Descripcion"></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="articlePrecio" class="form-label">Precio</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-light border-0">$</span>
-                            <input type="number" id="articlePrecio" class="form-control bg-light border-0" name="Precio"
-                                placeholder="10.99" min="0" step="0.01" [(ngModel)]="productObj.Precio">
+<div *ngIf="esAdmin">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-form">
+                    <h2>¡Hola Administrador {{ nombreUsuario }}!</h2>
+                    <h3>Agregar Nuevo Producto</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control">
                         </div>
-                    </div>
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="button" class="btn btn-dark btn-lg" (click)="onsaveRecord()">
-                            Guardar artículo
-                        </button>
-                    </div>
-                </form>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Gestionar Productos Existentes</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let articulo of articulos">
+                            <th scope="row">{{ articulo.idArticulo }}</th>
+                            <td>{{ articulo.Nombre }}</td>
+                            <td>${{ articulo.Precio }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning me-2">Editar</button>
+                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    
-    <div *ngIf="!isAdmin" class="container mt-4">
-        <div class="row">
-            <div class="col-md-4 mb-4" *ngFor="let producto of productos">
-                <div class="card product-card h-100">
-                    <img [src]="producto.Foto" class="product-image card-img-top" alt="{{ producto.Nombre }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ producto.Nombre }}</h5>
-                        <p class="card-text">{{ producto.Descripcion }}</p>
-                        <p class="card-text fw-bold" [textContent]="producto.Precio | currency"></p>
-                    </div>
+</div>
+
+
+<div *ngIf="!esAdmin">
+    <h2>¡Bienvenido {{ nombreUsuario }}!</h2>
+    <p>Estos son nuestros productos:</p>
+
+    <div class="product-gallery">
+        <div class="product-card" *ngFor="let articulo of articulos">
+            <img [src]="'public/Recursos/Articulos/' + articulo.Foto" alt="{{ articulo.Nombre }}" class="product-image">
+            <div class="product-info">
+                <h5 class="product-title">{{ articulo.Nombre }}</h5>
+                <p class="product-description">{{ articulo.Descripcion }}</p>
+                <p class="product-price">${{ articulo.Precio }}</p>
+                <div class="product-actions">
+                    <button class="btn btn-outline-danger btn-sm">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm">Agregar al carrito</button>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</div>

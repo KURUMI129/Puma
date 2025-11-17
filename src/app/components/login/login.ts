@@ -1,55 +1,69 @@
-/* import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-login',
-  imports: [],
-  templateUrl: './login.html',
-  styleUrl: './login.css'
-})
-export class Login {
-
-}
- */
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthLoginService } from '../../services/authLogin'; // Importamos el nuevo servicio
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router'; 
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule, RouterModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
-export class Login {
-  userType: string = 'user';
-  loginObj: any = {
-    email: '',
-    password: '',
-    adminId: ''
+export class LoginComponent {
+
+  loginData = {
+    correo: '',
+    contraseña: ''
   };
 
-  router = inject(Router);
-  
-  setUserType(type: string) {
-    this.userType = type;
+  imagenLogin: string = 'public/Recursos/Logo Puma.jpeg';
+
+  // Usamos el correo de Karol (el admin) para el efecto visual
+  private adminEmails: string[] = ['karollevitafollasalazar@gmail.com'];
+
+  constructor(
+    private authService: AuthLoginService, // Inyectamos el nuevo servicio
+    private router: Router
+  ) { }
+
+  /**
+   * Cambia la imagen según el correo que se escribe
+   */
+  onEmailChange(): void {
+    const correo = this.loginData.correo.toLowerCase();
+    if (this.adminEmails.includes(correo)) {
+      this.imagenLogin = 'public/Recursos/Administrador.jpg';
+    } else if (correo.length > 0) {
+      this.imagenLogin = 'public/Recursos/Usuario.jpg';
+    } else {
+      this.imagenLogin = 'public/Recursos/Logo Puma.jpeg';
+    }
   }
 
-  onLogin() {
-    if (this.userType == 'admin') {
-      // Lógica para el administrador
-      if (this.loginObj.adminId == '01' && this.loginObj.password == '123') {
-        this.router.navigate(['/home', 'admin']);
-      } else {
-        alert("Credenciales de administrador incorrectas");
-      }
-    } else {
-      // Lógica para el usuario normal con datos de pruebapanel
-      if (this.loginObj.email == 'Cadenaj285@gmail.com' && this.loginObj.password == '123') {
-        this.router.navigate(['/home', 'user']);
-      } else {
-        alert("Credenciales de usuario incorrectas");
-      }
+  /**
+   * Se llama al presionar "Entrar"
+   */
+  async onSubmit(): Promise<void> {
+    try {
+      // 1. Llama al nuevo servicio de login
+      const usuario = await this.authService.login(
+        this.loginData.correo,
+        this.loginData.contraseña
+      );
+
+      // 2. Guarda el usuario en localStorage
+      localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
+
+      // 3. Redirige a /home
+      this.router.navigate(['/home']);
+
+    } catch (error) {
+      // Si el login falla
+      alert('Error: Correo o contraseña incorrectos.');
+      console.error('Error en el login:', error);
     }
   }
 }

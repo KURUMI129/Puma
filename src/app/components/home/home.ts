@@ -1,58 +1,62 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ProductosService } from '../../services/productos';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Iisproductos } from '../../models/is.Model';
-import { Productos } from '../../services/productos';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrls: ['./home.css'],
+  providers: [ProductosService]
 })
-export class Home implements OnInit {
+export class HomeComponent implements OnInit {
 
-  isAdmin = false;
-  productos: Iisproductos[] = [];
-  productObj: any = {
-    Foto: null,
-    Nombre: '',
-    Descripcion: '',
-    Precio: ''
-  };
+  articulos: any[] = [];
 
-  constructor(private route: ActivatedRoute, private Productos: Productos) {
-    const userType = this.route.snapshot.paramMap.get('userType');
-    if (userType === 'admin') {
-      this.isAdmin = true;
-    }
-  }
+  public esAdmin: boolean = false;
+  public nombreUsuario: string = '';
+
+  constructor(
+    private productosService: ProductosService, // <--- Este es tu servicio de productos
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.loadProductsFromApi();
-  }
+    // --- LÓGICA DE AUTENTICACIÓN ---
+    const usuarioString = localStorage.getItem('usuarioLogueado');
 
-  loadProductsFromApi(): void {
-    this.Productos.obtenerProductos().subscribe(
-      (data) => {
-        this.productos = data;
-      },
-      (error) => {
-        console.error('Error al cargar productos desde la API', error);
+    if (usuarioString) {
+      const usuario = JSON.parse(usuarioString);
+      this.nombreUsuario = usuario.Nombre;
+
+      if (usuario.Rol === 'admin') {
+        this.esAdmin = true;
+      } else {
+        this.esAdmin = false;
       }
-    );
-  }
-
-  onFileSelected(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      this.productObj.Foto = event.target.files[0];
+    } else {
+      // Si no hay nadie logueado, lo mandamos al login
+      alert('No has iniciado sesión.');
+      this.router.navigate(['/login']);
+      return;
     }
+
+    // Cargamos los artículos
+    this.getArticulos();
   }
 
-  onsaveRecord() {
-    console.log('Botón "Guardar" presionado. Lógica de API pendiente.');
-    alert('El formulario de admin está deshabilitado temporalmente.');
-    this.productObj = { Foto: null, Nombre: '', Descripcion: '', Precio: '' };
+  async getArticulos(): Promise<void> {
+    try {
+      const data = await this.productosService.getArticulos();
+      this.articulos = data;
+      console.log('Artículos cargados:', this.articulos);
+    } catch (error) {
+      console.error('Error al obtener artículos', error);
+    }
   }
 }
