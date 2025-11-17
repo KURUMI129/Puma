@@ -56,7 +56,7 @@ export class Login {
 
       localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
 
-      this.router.navigate(['/home', usuario.Rol]);
+      this.router.navigate(['/home', usuario.rol]);
 
     } catch (error) {
       alert('Error: Correo o contraseña incorrectos.');

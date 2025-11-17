@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
-import { Home } from './components/home/home';
-import { Login } from './components/login/login';
+// CORREGIDO: Importar 'Home' (no HomeComponent)
+import { Home } from './components/home/home'; 
+// CORREGIDO: Importar 'Login' (no LoginComponent)
+import { Login } from './components/login/login'; 
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Bartest } from './components/bartest/bartest';
@@ -15,13 +17,12 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        // Esta es tu ruta principal que sí funciona
         path: 'home/:userType',
-        component: Home
+        component: Home 
     },
     {
         path: 'login',
-        component: Login
+        component: Login 
     },
     {
         path: 'header',

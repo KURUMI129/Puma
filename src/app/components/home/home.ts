@@ -14,6 +14,7 @@ import { firstValueFrom } from 'rxjs';
   providers: [Productos]
 })
 
+// ... (imports y @Component)
 export class Home implements OnInit {
 
   articulos: any[] = [];
@@ -22,7 +23,7 @@ export class Home implements OnInit {
   public nombreUsuario: string = '';
 
   constructor(
-    private productosService: Productos,
+    private productosService: Productos, 
     private http: HttpClient,
     private router: Router
   ) { }
@@ -32,9 +33,12 @@ export class Home implements OnInit {
 
     if (usuarioString) {
       const usuario = JSON.parse(usuarioString);
-      this.nombreUsuario = usuario.Nombre;
+      
+      // Asegúrate que aquí se lea 'Nombre' (N mayúscula)
+      this.nombreUsuario = usuario.Nombre; 
 
-      if (usuario.Rol === 'admin') {
+      // Asegúrate que aquí se lea 'Rol' (R mayúscula)
+      if (usuario.Rol === 'admin') { 
         this.esAdmin = true;
       } else {
         this.esAdmin = false;
