@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductosService } from '../../services/productos';
+import { Productos } from '../../services/productos';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -11,7 +11,8 @@ import { firstValueFrom } from 'rxjs';
   imports: [CommonModule, HttpClientModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
-  providers: [ProductosService]
+  // CORRECCIÓN 2: Proveer 'Productos'
+  providers: [Productos]
 })
 export class HomeComponent implements OnInit {
 
@@ -21,13 +22,12 @@ export class HomeComponent implements OnInit {
   public nombreUsuario: string = '';
 
   constructor(
-    private productosService: ProductosService, // <--- Este es tu servicio de productos
+    private productosService: Productos,
     private http: HttpClient,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    // --- LÓGICA DE AUTENTICACIÓN ---
     const usuarioString = localStorage.getItem('usuarioLogueado');
 
     if (usuarioString) {
@@ -40,19 +40,17 @@ export class HomeComponent implements OnInit {
         this.esAdmin = false;
       }
     } else {
-      // Si no hay nadie logueado, lo mandamos al login
       alert('No has iniciado sesión.');
       this.router.navigate(['/login']);
       return;
     }
 
-    // Cargamos los artículos
     this.getArticulos();
   }
 
   async getArticulos(): Promise<void> {
     try {
-      const data = await this.productosService.getArticulos();
+      const data = await firstValueFrom(this.productosService.obtenerProductos());
       this.articulos = data;
       console.log('Artículos cargados:', this.articulos);
     } catch (error) {
