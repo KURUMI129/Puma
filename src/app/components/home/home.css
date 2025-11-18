@@ -1,7 +1,47 @@
+/* --- ESTILOS AÑADIDOS PARA ARREGLAR EL LAYOUT --- */
+
+/* Contenedor principal de la galería */
+.product-gallery {
+  display: grid;
+  /* Define columnas automáticas: 
+    - Cada columna tendrá un mínimo de 300px.
+    - Crecerán flexiblemente (1fr) para ocupar el espacio.
+    - Se ajustarán automáticamente (auto-fit) según el ancho de la pantalla.
+  */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem; /* Espacio entre las tarjetas */
+  padding: 1.5rem; /* Espacio alrededor de toda la galería */
+}
+
+/* Contenedor de la información de texto */
+.product-info {
+  padding: 1rem; /* Espaciado interno para el texto */
+}
+
+/* Contenedor de los botones */
+.product-actions {
+  display: flex;
+  justify-content: space-between; /* Botones a cada lado */
+  align-items: center;
+  /* Espaciado solo en los lados y abajo, no arriba */
+  padding: 0 1rem 1rem 1rem; 
+}
+
+/* --- FIN DE ESTILOS AÑADIDOS --- */
+
+
+/* --- TUS ESTILOS ORIGINALES (con una pequeña adición) --- */
+
 /* Estilo general para cada tarjeta de producto */
 .product-card {
   border: 1px solid #eee; /* Borde sutil */
   transition: box-shadow 0.3s ease-in-out; /* Animación suave para la sombra */
+  
+  /* AÑADIDO: Esto asegura que todas las tarjetas tengan la misma altura
+     y que los botones queden siempre abajo. */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Efecto de sombra al pasar el mouse sobre la tarjeta */

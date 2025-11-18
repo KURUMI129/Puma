@@ -1,17 +1,35 @@
 <div *ngIf="esAdmin">
     <div class="container mt-5">
         <div class="row">
+            
             <div class="col-md-6">
                 <div class="product-form">
-                    <h2>¡Hola Administrador {{ nombreUsuario }}!</h2>
                     <h3>Agregar Nuevo Producto</h3>
+                    
                     <form>
                         <div class="mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" class="form-control">
+                            <label for="adminNombre" class="form-label">Nombre del Artículo</label>
+                            <input type="text" class="form-control" id="adminNombre">
                         </div>
-                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        
+                        <div class="mb-3">
+                            <label for="adminDescripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="adminDescripcion" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="adminPrecio" class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="adminPrecio" placeholder="0.00">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="adminImagen" class="form-label">Imagen del Artículo</label>
+                            <input class="form-control" type="file" id="adminImagen">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Agregar Producto</button>
                     </form>
+                    
                 </div>
             </div>
 
@@ -21,6 +39,7 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">Foto</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Acciones</th>
@@ -29,6 +48,13 @@
                     <tbody>
                         <tr *ngFor="let articulo of articulos">
                             <th scope="row">{{ articulo.idArticulo }}</th>
+                            
+                            <td>
+                                <img [src]="articulo.Foto" 
+                                     alt="{{ articulo.Nombre }}" 
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </td>
+
                             <td>{{ articulo.Nombre }}</td>
                             <td>${{ articulo.Precio }}</td>
                             <td>
@@ -39,28 +65,28 @@
                     </tbody>
                 </table>
             </div>
+            
         </div>
     </div>
 </div>
 
-
 <div *ngIf="!esAdmin">
-    <h2>¡Bienvenido {{ nombreUsuario }}!</h2>
-    <p>Estos son nuestros productos:</p>
-
     <div class="product-gallery">
         <div class="product-card" *ngFor="let articulo of articulos">
-            <img [src]="'public/Recursos/Articulos/' + articulo.Foto" alt="{{ articulo.Nombre }}" class="product-image">
+            
+            <img [src]="articulo.Foto" alt="{{ articulo.Nombre }}" class="product-image">
+            
             <div class="product-info">
                 <h5 class="product-title">{{ articulo.Nombre }}</h5>
                 <p class="product-description">{{ articulo.Descripcion }}</p>
                 <p class="product-price">${{ articulo.Precio }}</p>
-                <div class="product-actions">
-                    <button class="btn btn-outline-danger btn-sm">
-                        <i class="fas fa-heart"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm">Agregar al carrito</button>
-                </div>
+            </div>
+
+            <div class="product-actions">
+                <button class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <button class="btn btn-primary btn-sm">Agregar al carrito</button>
             </div>
         </div>
     </div>
